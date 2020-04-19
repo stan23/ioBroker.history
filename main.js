@@ -267,7 +267,6 @@ function finish(callback) {
 }
 
 function processMessage(msg) {
-    if (msg.from
     if (msg.command === 'getHistory') {
         getHistory(msg);
     } else if (msg.command === 'storeState') {
