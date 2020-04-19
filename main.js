@@ -1008,7 +1008,24 @@ function getDirectories(path) {
 }
 
 function storeState(msg) {
-    if (!msg.message || !msg.message.id || !msg.message.state) {
+//    if (!msg.message || !msg.message.id || !msg.message.state) {
+    if (!msg.message) {
+        adapter.log.error('storeState called with invalid data');
+        adapter.log.error('storeState Incoming Object: ' + JSON.stringify(msg));
+        adapter.sendTo(msg.from, msg.command, {
+            error:  'Invalid call'
+        }, msg.callback);
+        return;
+    }
+    if (!msg.message.id) {
+        adapter.log.error('storeState called with invalid data');
+        adapter.log.error('storeState Incoming Object: ' + JSON.stringify(msg));
+        adapter.sendTo(msg.from, msg.command, {
+            error:  'Invalid call'
+        }, msg.callback);
+        return;
+    }
+    if (!msg.message.state) {
         adapter.log.error('storeState called with invalid data');
         adapter.log.error('storeState Incoming Object: ' + JSON.stringify(msg));
         adapter.sendTo(msg.from, msg.command, {
