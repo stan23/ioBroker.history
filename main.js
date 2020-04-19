@@ -1010,9 +1010,9 @@ function getDirectories(path) {
 function storeState(msg) {
     if (!msg.message || !msg.message.id || !msg.message.state) {
         // if this is already an successful callback then do not send back another message
-        if (msg.success && msg.success === true) {
+        if (msg.message.success && msg.message.success === true) {
             adapter.log.debug('storeState called with invalid data, but as part of a callback that indicates success');
-        } else if (msg.error) {
+        } else if (msg.message.error) {
             adapter.log.debug('storeState called with invalid data, but as part of a callback that indicates an error');
         } else {
             adapter.log.error('storeState called with invalid data');
